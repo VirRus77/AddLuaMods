@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Autonauts Condition=" '$(Autonauts)' == '' ">false</Autonauts>
+  </PropertyGroup>
+    
+  <PropertyGroup Condition=" '$(Autonauts)' == 'true' ">
+    <DefineConstants>Autonauts</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Autonaut Id -->
+    <SteamApplicationId>979120</SteamApplicationId>
+    <!-- Autonauts vs Pirate Id -->
+    <SteamApplicationId Condition=" '$(Autonauts)' != 'true' ">1907720</SteamApplicationId>
+    <GameManagedData>$(GamePath)\Autonauts_Data\Managed</GameManagedData>
+    <GameManagedData Condition=" '$(Autonauts)' != 'true' ">$(GamePath)\Autonauts vs Pirate Bots_Data\Managed</GameManagedData>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityEngine.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityModManager">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityModManager\UnityModManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(GameManagedData)\UnityModManager\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net47</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>VirRus77</Authors>
+    <Mod_Version>0.5.0</Mod_Version>
+    <Mod_ManagerVersion>0.25.0</Mod_ManagerVersion>
+    <Mod_EntryMethod>$(RootNamespace).EntryPoint.Load</Mod_EntryMethod>
+    <Autonauts>false</Autonauts>
+  </PropertyGroup>
+
+  <Import Project="$(SolutionDir)\solution.private.targets" />
+  <Import Project="$(SolutionDir)\solution.targets" />
+  <Import Project="$(SolutionDir)\ModInfoJson.targets" />
+
+  <Target Name="BuildMakeModInfo" AfterTargets="Build">
+    <CallTarget Targets="MakeModInfo" />
+  </Target>
+
+  <Target Name="BuildCopyModToGame" AfterTargets="Build">
+    <CallTarget Targets="CopyModToGame" />
+  </Target>
+
+  <Target Name="RunCopyModToGame" BeforeTargets="Run">
+    <CallTarget Targets="CopyModToGame" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+</Project>

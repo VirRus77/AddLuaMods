@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Mod_Id Condition=" '$(Mod_Id)' == '' ">$(AssemblyName)</Mod_Id>
+    <Mod_DisplayName Condition=" '$(DisplayName)' == '' ">$(Mod_Id)</Mod_DisplayName>
+    <Mod_Author Condition=" '$(Mod_Author)' == '' ">$(Authors)</Mod_Author>
+    <Mod_Version Condition=" '$(Mod_Version)' == '' ">$(Version)</Mod_Version>
+    <Mod_AssemblyName Condition=" '$(Mod_AssemblyName)' == '' ">$(AssemblyName).dll</Mod_AssemblyName>
+    <Mod_EntryMethod Condition=" '$(Mod_EntryMethod)' == ''" >$(RootNamespace).Main.Load</Mod_EntryMethod>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ValueLine Include="{"/>
+    <ValueLine Include="&quot;Id&quot;: &quot;$(Mod_Id)&quot;,"/>
+    <ValueLine Include="&quot;DisplayName&quot;: &quot;$(Mod_DisplayName)&quot;,"/>
+    <ValueLine Include="&quot;Author&quot;: &quot;$(Mod_Author)&quot;,"/>
+    <ValueLine Include="&quot;Version&quot;: &quot;$(Mod_Version)&quot;,"/>
+    <ValueLine Include="&quot;ManagerVersion&quot;: &quot;$(Mod_ManagerVersion)&quot;,"/>
+    <ValueLine Include="&quot;AssemblyName&quot;: &quot;$(Mod_AssemblyName)&quot;,"/>
+    <ValueLine Include="&quot;EntryMethod&quot;: &quot;$(Mod_EntryMethod)&quot;"/>
+    <ValueLine Include="}"/>
+  </ItemGroup>
+
+  <Target Name="MakeModInfo">
+    <Message Text="Make Mod Info." Importance="high" />
+    <WriteLinesToFile
+      File="$(OutputPath)\Info.json"
+      Overwrite="True"
+      Lines="@(ValueLine)"
+      />
+  </Target>
+
+  <Target Name="CopyModToGame">
+    <Message Text="Copy mod." Importance="high" />
+    <Error Text="GamePath not set." Condition=" '$(GamePath)' == ''"/>
+    <Message Text="Copy mod to game: &quot;$(GamePath)\Mods\$(AssemblyName)&quot;" Importance="High" />
+
+    <RemoveDir Directories="$(GamePath)\Mods\$(AssemblyName)"/>
+    <ItemGroup>
+      <MyStuff Include="$(TargetDir)**\*" />
+      <!--<MyStuff Include="$(TargetDir)Info.json" />-->
+    </ItemGroup>
+    <Message Text="MyStuff: @(MyStuff)" Importance="High" />
+    <Message Text="TargetDir: $(TargetDir)" Importance="High" />
+    <Copy SourceFiles="@(MyStuff)" DestinationFolder="$(GamePath)\Mods\$(AssemblyName)\%(RecursiveDir)" ContinueOnError="false" />
+    <!--<Copy SourceFiles="$(TergetDir)\Info.json" DestinationFolder="$(GamePath)\Mods\$(AssemblyName)\Info.json" ContinueOnError="false" />-->
+  </Target>
+</Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AddLuaMods": {
+      "commandName": "Executable",
+      "executablePath": "cmd",
+      "commandLineArgs": "/C start steam://rungameid/$(SteamApplicationId)",
+      "applicationUrl": "/C \"start steam://rungameid/$(SteamApplicationId)\""
+    }
+  }
+}
